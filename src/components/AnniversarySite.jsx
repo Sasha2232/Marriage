@@ -145,10 +145,11 @@ export default function AnniversarySite() {
     const [showCalendar, setShowCalendar] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    // 1. Загрузка сообщений
-    const fetchMessages = async () => {
+    // Загрузка сообщений
+    const fetchMessages = useCallback(async () => {
         try {
             const res = await fetch('/api/messages');
+            if (!res.ok) throw new Error('Ошибка сервера');
             const data = await res.json();
             if (Array.isArray(data)) {
                 setMessages(data);
@@ -156,11 +157,16 @@ export default function AnniversarySite() {
         } catch (err) {
             console.error("Ошибка загрузки данных:", err);
         }
-    };
+    }, []);
 
     useEffect(() => {
-        fetchMessages();
-    }, []);
+        fetchMessages(); // Первая загрузка
+        
+        // Авто-обновление каждые 15 секунд, чтобы видеть новые сообщения от других
+        const interval = setInterval(fetchMessages, 15000); 
+        
+        return () => clearInterval(interval);
+    }, [fetchMessages]);
 
     // 2. Отправка сообщения
     const handleSendMessage = async (e) => {
