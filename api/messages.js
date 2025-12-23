@@ -1,46 +1,48 @@
 import { sql } from '@vercel/postgres';
 
 export default async function handler(req, res) {
-  // 1. Разрешаем запросы (CORS)
+  // CORS настройки
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Обработка предварительного запроса (OPTIONS)
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
   try {
-    // 2. Создаем таблицу (на всякий случай)
+    // 1. Создаем таблицу (используем обратные кавычки ` `)
     await sql`
       CREATE TABLE IF NOT EXISTS anniversary_messages (
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
         text TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
       );
     `;
 
-    // 3. Обработка GET (Загрузка)
+    // 2. Загрузка сообщений (GET)
     if (req.method === 'GET') {
-      const { rows } = await sql`SELECT * FROM anniversary_messages ORDER BY created_at DESC`;
+      const { rows } = await sql`SELECT * FROM anniversary_messages ORDER BY created_at DESC;`;
       return res.status(200).json(rows);
     }
 
-    // 4. Обработка POST (Отправка)
+    // 3. Сохранение сообщения (POST)
     if (req.method === 'POST') {
       const { name, text } = req.body;
+      
       if (!name || !text) {
         return res.status(400).json({ error: 'Заполните все поля' });
       }
       
+      // Вставляем данные (используем безопасную передачу переменных через ${})
       await sql`INSERT INTO anniversary_messages (name, text) VALUES (${name}, ${text});`;
-      const { rows } = await sql`SELECT * FROM anniversary_messages ORDER BY created_at DESC`;
+      
+      // Сразу возвращаем обновленный список
+      const { rows } = await sql`SELECT * FROM anniversary_messages ORDER BY created_at DESC;`;
       return res.status(200).json(rows);
     }
 
-    // Если метод не GET и не POST
     return res.status(405).json({ error: 'Method not allowed' });
 
   } catch (error) {
