@@ -159,14 +159,13 @@ export default function AnniversarySite() {
         }
     }, []);
 
-    useEffect(() => {
-        fetchMessages(); // Первая загрузка
+   useEffect(() => {
+        fetchMessages(); // Загрузить при открытии
         
-        // Авто-обновление каждые 15 секунд, чтобы видеть новые сообщения от других
-        const interval = setInterval(fetchMessages, 15000); 
-        
+        // Проверять новые сообщения каждые 30 секунд
+        const interval = setInterval(fetchMessages, 30000); 
         return () => clearInterval(interval);
-    }, [fetchMessages]);
+    }, []);
 
     // 2. Отправка сообщения
     const handleSendMessage = async (e) => {
