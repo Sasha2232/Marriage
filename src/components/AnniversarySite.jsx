@@ -37,7 +37,7 @@ const GALLERY_DATA = [
 ];
 
 const COUPLE_NAME = 'Сергей & Ольга';
-const WEDDING_DATE = '2006-12-24';
+const WEDDING_DATE = '2005-12-24';
 const HERO_PHOTO = mainPhoto;
 
 const ALL_PHOTOS = [day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24];
@@ -60,7 +60,7 @@ const IMPORTANT_DATES = [
     },
     { 
         title: 'Рождение второго сына', 
-        date: '2018-09-06',
+        date: '2017-09-06',
         icon: '👶'
     }
 ];
