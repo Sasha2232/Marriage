@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // --- ИМПОРТЫ ИЗОБРАЖЕНИЙ ---
 import mainPhoto from "../images/main.jpg";
+import marriage from "../images/marriage.jpg";
 import day1 from "../images/day1.JPG";
 import day2 from "../images/day2.jpg";
 import day3 from "../images/day3.jpg";
@@ -31,7 +32,7 @@ import day24 from "../images/day24.jpg";
 // --- НАСТРОЙКИ ---
 const GALLERY_DATA = [
     { src: day9, caption: 'Наш первый отпуск 🌴', description: 'Этот момент навсегда останется в наших сердцах. Помню, как мы тогда гуляли до самого утра!' },
-    { src: mainPhoto, caption: 'День свадьбы 💍', description: 'Самый счастливый день, когда мы стали одной семьей.' },
+    { src: marriage, caption: 'День свадьбы 💍', description: 'Самый счастливый день, когда мы стали одной семьей.' },
     { src: day11, caption: 'Просто мы ❤️', description: 'Любовь, улыбки и теплые вечера, которые делают нашу жизнь уютнее.' },
 ];
 
@@ -39,7 +40,7 @@ const COUPLE_NAME = 'Сергей & Ольга';
 const WEDDING_DATE = '2006-12-24';
 const HERO_PHOTO = mainPhoto;
 
-const ALL_PHOTOS = [day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24];
+const ALL_PHOTOS = [day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24];
 
 const CALENDAR_MEMORIES = {
     24: { img: day14, text: "Наш особенный день ✨" },
