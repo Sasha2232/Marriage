@@ -50,7 +50,7 @@ const CALENDAR_MEMORIES = {
 const IMPORTANT_DATES = [
     { 
         title: 'Дата свадьбы', 
-        date: '24 декабря 2006 года',
+        date: '24 декабря 2005 года',
         icon: '💍'
     },
     { 
